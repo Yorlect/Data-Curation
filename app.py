@@ -16,10 +16,10 @@ ADMIN_PASSWORD = st.secrets["admin"]["password"]
 # -----------------------------
 def load_sentences():
     df = pd.read_csv(CSV_URL)
-    if "English" not in df.columns:
-        st.error("CSV must contain an 'English' column.")
+    if "english" not in df.columns:
+        st.error("CSV must contain an 'english' column.")
         st.stop()
-    return df["English"].tolist()
+    return df["english"].tolist()
 
 def load_user_progress():
     if os.path.exists(PROGRESS_FILE):
@@ -136,7 +136,7 @@ def translation_page(username):
                 user_data["translations"] = {}
 
             user_data["translations"][str(sentence_idx)] = {
-                "English": sentence,
+                "english": sentence,
                 "Translation": translation.strip(),
                 "Timestamp": datetime.now().isoformat()
             }
