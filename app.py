@@ -7,7 +7,7 @@ from datetime import datetime
 # -----------------------------
 # Config
 # -----------------------------
-CSV_URL = "https://raw.githubusercontent.com/joynaomi81/Data-Curation/refs/heads/main/english_only.csv"
+CSV_URL = "https://raw.githubusercontent.com/Yorlect/Data-Curation/refs/heads/main/Yorlect_english_data.csv"
 PROGRESS_FILE = "user_progress.json"
 ADMIN_PASSWORD = st.secrets["admin"]["password"]
 
