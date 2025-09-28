@@ -24,7 +24,19 @@ def load_sentences():
 def load_user_progress():
     if os.path.exists(PROGRESS_FILE):
         with open(PROGRESS_FILE, "r") as f:
-            return json.load(f)
+            data = json.load(f)
+
+        # ✅ Ensure backward compatibility (fix KeyError issues)
+        for user, details in data.items():
+            if "translations" not in details:
+                details["translations"] = {}
+            if "metadata" not in details:
+                details["metadata"] = {}
+            if "assigned" not in details:
+                details["assigned"] = []
+            if "index" not in details:
+                details["index"] = 0
+        return data
     return {}
 
 def save_user_progress(data):
@@ -119,6 +131,10 @@ def translation_page(username):
         if translation.strip() == "":
             st.warning("⚠️ Please enter a translation before submitting.")
         else:
+            # ✅ Ensure translations dictionary exists
+            if "translations" not in user_data:
+                user_data["translations"] = {}
+
             user_data["translations"][str(sentence_idx)] = {
                 "English": sentence,
                 "Translation": translation.strip(),
@@ -128,7 +144,7 @@ def translation_page(username):
             all_progress[username] = user_data
             save_user_progress(all_progress)
             st.success("✅ Translation submitted! Moving to next sentence...")
-            st.rerun()  # updated from experimental_rerun
+            st.rerun()
 
 # -----------------------------
 # Admin Page
@@ -276,6 +292,7 @@ def main():
         This is a **Data Curation Web App** built with Streamlit.  
         - Users log in, provide metadata, and translate **100 unique sentences**.  
         - Progress is saved so they can continue anytime.  
+        - Admin can log in securely, monitor user progress, and download both **metadata** and **translations** separately.  
         - Built for collaborative language resource creation 🌍.
         """)
 
