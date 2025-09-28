@@ -200,7 +200,7 @@ def admin_page():
             translation_rows.append({
                 "User": user,
                 "Index": idx,
-                "english": entry["English"],
+                "english": entry["english"],
                 "Translation": entry["Translation"],
                 "Timestamp": entry["Timestamp"]
             })
