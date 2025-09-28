@@ -200,7 +200,7 @@ def admin_page():
             translation_rows.append({
                 "User": user,
                 "Index": idx,
-                "English": entry["English"],
+                "english": entry["English"],
                 "Translation": entry["Translation"],
                 "Timestamp": entry["Timestamp"]
             })
@@ -292,7 +292,6 @@ def main():
         This is a **Data Curation Web App** built with Streamlit.  
         - Users log in, provide metadata, and translate **100 unique sentences**.  
         - Progress is saved so they can continue anytime.  
-        - Admin can log in securely, monitor user progress, and download both **metadata** and **translations** separately.  
         - Built for collaborative language resource creation 🌍.
         """)
 
